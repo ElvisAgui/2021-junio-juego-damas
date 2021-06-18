@@ -25,18 +25,48 @@ public class Manejador {
         }
     }
     
-    public void ejegir2(){
+    public Jugador[] ejegir2(){
+        Jugador jugCompetidor[] = new Jugador[2];
         boolean repit = true,pit = true;
         jugadoresLista();
         do {
             int aux = EntradaDatos.getEntero("--Digite el numero de jugador que va competir", false);
             if (0<aux && aux <= 5 ) {
-                
+                jugCompetidor[0] = this.jugadores[aux];
+                jugCompetidor[0].setTipCasilla(elegirCasilla());
+                repit = false;
             }
-            
-        } while (repit && pit);
+            aux = EntradaDatos.getEntero("--Digite el numero de jugador que va competir", false);
+            if (0<aux && aux <= 5 ) {
+                jugCompetidor[1] = this.jugadores[aux];
+                jugCompetidor[1].setTipCasilla(elegirCasilla());
+                pit = false;
+            } 
+            if (pit && repit) {
+                System.out.println("Datos incorrectos******* :(");
+            }
+        } while (repit && pit); 
+        return jugCompetidor;  
         
-        
+    }
+
+    public String elegirCasilla() {
+        int aux =1;
+        String tem= "";
+        do{
+            System.out.println("\n---Fichas a escoger");
+            System.out.println("1- Blancos");
+            System.out.println("2- Negros");
+            aux = EntradaDatos.getEntero("--Digite el numero de ficha a jugar", false);
+            if(aux == 1){
+                tem = "blanco";
+            }
+            if(aux  == 2){
+                tem = "blanco";
+            }
+
+        }while(aux >2);
+        return tem;
     }
     
 
