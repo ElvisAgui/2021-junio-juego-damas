@@ -1,6 +1,9 @@
 package src.jugadores;
 
+import src.miniJuego.PPTijera;
+
 public class Jugador {
+    private PPTijera miniJuego = new PPTijera();
     private int puntos;
     private int partidasGanadas;
     private int partidasPerdidas;
@@ -8,12 +11,24 @@ public class Jugador {
     private String nombre;
     private int piezsComidas;
     private int piezsPerdidas;
-    private String tipCasilla = "vacio";
-
     
     public Jugador(String nombre){
         this.nombre = nombre;
     }
+
+
+    
+    public PPTijera getMiniJuego() {
+        return miniJuego;
+    }
+
+
+
+    public void setMiniJuego(PPTijera miniJuego) {
+        this.miniJuego = miniJuego;
+    }
+
+
 
     public int getPiezsComidas() {
         return piezsComidas;

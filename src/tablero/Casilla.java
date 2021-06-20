@@ -45,6 +45,14 @@ public class Casilla {
         return ocupada;
     }
 
+    public boolean isEsNegro() {
+        return esNegro;
+    }
+
+    public void setEsNegro(boolean esNegro) {
+        this.esNegro = esNegro;
+    }
+
     public void setOcupada(boolean ocupada) {
         this.ocupada = ocupada;
     }
