@@ -1,4 +1,4 @@
-package principal;
+package src.principal;
 import java.util.*;
 
 public class EntradaDatos {

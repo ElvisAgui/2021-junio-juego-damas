@@ -1,45 +1,45 @@
-package tablero;
+package src.tablero;
 
 public class Casilla {
+    private boolean jugable;
     private int posfila;
     private int posColumna;
-    private boolean ocupada = false;
-    private String figura1;
+    private Ficha ficha;
+    private boolean esNegro;
+    private boolean ocupada;
 
-    public Casilla() {
-        
+    public Casilla(boolean jugable, boolean esNegro, boolean ocupada) {
+        this.jugable = jugable;
+        this.esNegro = esNegro;
+        this.ocupada = ocupada;
+        inicFicha(esNegro);
     }
 
+    private void inicFicha(boolean esNegro) {
+        if (jugable) {
+            this.ficha = new Ficha(true,esNegro); 
+        }
+        if (jugable == false) {
+            this.ficha = new Ficha(false,esNegro);
+        }
+    }
     
-    public String getFigura1() {
-        return figura1;
+
+    public Ficha getFicha() {
+        return ficha;
     }
 
-
-    public void setFigura1(String figura1) {
-        this.figura1 = figura1;
+    public void setFicha(Ficha ficha) {
+        this.ficha = ficha;
     }
 
-
-    public int getPosfila() {
-        return posfila;
+    public boolean isJugable() {
+        return jugable;
     }
 
-
-    public void setPosfila(int posfila) {
-        this.posfila = posfila;
+    public void setJugable(boolean jugable) {
+        this.jugable = jugable;
     }
-
-
-    public int getPosColumna() {
-        return posColumna;
-    }
-
-
-    public void setPosColumna(int posColumna) {
-        this.posColumna = posColumna;
-    }
-
 
     public boolean isOcupada() {
         return ocupada;
@@ -49,7 +49,36 @@ public class Casilla {
         this.ocupada = ocupada;
     }
 
-    
+    public int getPosfila() {
+        return posfila;
+    }
 
-    
+    public void setPosfila(int posfila) {
+        this.posfila = posfila;
+    }
+
+    public int getPosColumna() {
+        return posColumna;
+    }
+
+    public void setPosColumna(int posColumna) {
+        this.posColumna = posColumna;
+    }
+
+    public String getCelda(){
+        String celda = "     ";
+        String reset = "\u001B[0m";
+        String fondoBalco = "\u001B[47m";
+
+        if (jugable && ocupada == true) {
+            celda = fondoBalco+"  "+this.ficha.getFicha()+"  "+reset;
+        }
+        if (jugable && ocupada == false) {
+            celda = fondoBalco+ celda +reset;
+        }
+        return celda;
+    }
+
+
+
 }

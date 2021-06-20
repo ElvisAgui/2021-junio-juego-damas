@@ -1,6 +1,6 @@
-package jugadores;
+package src.jugadores;
 
-import principal.EntradaDatos;
+import src.principal.EntradaDatos;
 
 public class Manejador {
 
@@ -33,13 +33,11 @@ public class Manejador {
             int aux = EntradaDatos.getEntero("--Digite el numero de jugador que va competir", false);
             if (0<aux && aux <= 5 ) {
                 jugCompetidor[0] = this.jugadores[aux];
-                jugCompetidor[0].setTipCasilla(elegirCasilla());
                 repit = false;
             }
             aux = EntradaDatos.getEntero("--Digite el numero de jugador que va competir", false);
             if (0<aux && aux <= 5 ) {
                 jugCompetidor[1] = this.jugadores[aux];
-                jugCompetidor[1].setTipCasilla(elegirCasilla());
                 pit = false;
             } 
             if (pit && repit) {

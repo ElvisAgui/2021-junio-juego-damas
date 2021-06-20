@@ -1,84 +1,101 @@
-package tablero;
+package src.tablero;
 
 public class Tablero {
-    String negro="\033[30m";
-    String blanco="\033[37m";
-    String reset="\u001B[0m";
-    public  final String SIMBOLO_VACIO = " ";
-    public  final String SIMBOLO_BLANCA = "X";
-    public  final String SIMBOLO_NEGRA = "0";
     private final Casilla[][] tablero = new Casilla[8][8];;
 
     public Tablero() {
-        inicialCasilla(); 
-        llenarTablero();
+        inicialCasilla1();
+        inicialCasilla2();
+        inicialCasilla3();
     }
 
     public void dibujarTablero() {
-        System.out.println("\t_________________________________________________");
+        System.out.println("\t-------------------------------------------------");
         for (int i = 0; i < tablero.length; i++) {
             System.out.print("\t|");
             for (int j = 0; j < tablero.length; j++) {
-                System.out.print("  ");
-                System.out.print(tablero[i][j].getFigura1() + "  ");
+                System.out.print(tablero[i][j].getCelda());
                 System.out.print("|");
             }
             System.out.println("");
-            System.out.println("\t_________________________________________________");
+            System.out.println("\t-------------------------------------------------");
+
         }
     }
-    private void llenarTablero() {
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
-                if (casillaCor(i, j) == "blanca") {
-                    tablero[i][j].setFigura1(pintarSigura(SIMBOLO_BLANCA, blanco)); 
-                }
-                if (casillaCor(i, j) == "negra") {
-                    tablero[i][j].setFigura1(pintarSigura(SIMBOLO_NEGRA, negro)); 
-                }
-                if (casillaCor(i, j) == "vacio") {
-                    tablero[i][j].setFigura1(SIMBOLO_VACIO); 
-                }
-                
+
+    private void inicialCasilla1() {
+        boolean esColorInicio = false;
+        boolean esColorIteracion = false;
+        for (int i = 0; i < 3; i++) {
+            esColorIteracion = !esColorInicio;
+            for (int j = 0; j < 8; j++) {
+                tablero[i][j] = new Casilla(esColorIteracion, esColorIteracion, esColorIteracion);
+                esColorIteracion = !esColorIteracion;
             }
-
+            esColorInicio = !esColorInicio;
         }
     }
 
-    public String pintarSigura(String figura,String color){
-        String pintado;
-        pintado = color+figura+this.reset;
-        return pintado;
-    }
-
-    public String casillaCor(int i,int j){
-        String fig = "vacio";
-        if((i ==0 && j == 0) || (i ==0 && j == 2) || (i ==0 && j == 4)|| (i ==0 && j == 6)){
-            fig = "blanca";
-        }
-        if((i ==1 && j == 1) || (i ==1 && j == 3) || (i ==1 && j == 5)|| (i ==1 && j == 7)){
-            fig = "blanca";
-        }
-        if((i ==2 && j == 0) || (i ==2 && j == 2) || (i ==2 && j == 4)|| (i ==2 && j == 6)){
-            fig = "blanca";
-        }
-        if((i ==5 && j == 0) || (i ==5 && j == 2) || (i ==5 && j == 4)|| (i ==5 && j == 6)){
-            fig = "negra";
-        }
-        if((i ==6 && j == 1) || (i ==6 && j == 3) || (i ==6 && j == 5)|| (i ==6 && j == 7)){
-            fig = "negra";
-        }
-        if((i ==7 && j == 0) || (i ==7 && j == 2) || (i ==7 && j == 4)|| (i ==7 && j == 6)){
-            fig = "negra";
-        }
-        return fig;
-    }
-    public void inicialCasilla(){
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
-                tablero[i][j] = new Casilla();
+    private void inicialCasilla2() {
+        boolean esColorInicio = true;
+        boolean esColorIteracion = true;
+        for (int i = 3; i < 5; i++) {
+            esColorIteracion = !esColorInicio;
+            for (int j = 0; j < 8; j++) {
+                tablero[i][j] = new Casilla(esColorIteracion, esColorIteracion, false);
+                esColorIteracion = !esColorIteracion;
             }
+            esColorInicio = !esColorInicio;
         }
-        
     }
+
+    private void inicialCasilla3() {
+
+        boolean esColorInicio = true;
+        boolean esColorIteracion = true;
+        for (int i = 5; i < 8; i++) {
+            esColorIteracion = !esColorInicio;
+            for (int j = 0; j < 8; j++) {
+                tablero[i][j] = new Casilla(esColorIteracion, false, esColorIteracion);
+                esColorIteracion = !esColorIteracion;
+            }
+            esColorInicio = !esColorInicio;
+        }
+
+    }
+
+    public boolean moverFicha(int inicioI, int inicioJ,int finI, int finJ){
+        boolean movExito = false;
+        boolean color;
+        if (casillaOcupada(inicioI, inicioJ) && casillaOcupada(finI,finJ) == false){
+            color = tablero[inicioI][inicioJ].getFicha().isEsNegro();
+            tablero[finI][finJ].setOcupada(true);
+            tablero[finI][finJ].getFicha().setEsNegro(color);
+            tablero[inicioI][inicioJ].setOcupada(false);
+            movExito= true;
+        }
+        return movExito;
+    }
+
+    public boolean casillaOcupada(int posi, int posj){
+        boolean ocup = false;
+        if(tablero[posi][posj].isJugable() && tablero[posi][posj].isOcupada()){
+            ocup = true;
+        }
+        if (tablero[posi][posj].isJugable() && tablero[posi][posj].isOcupada() == false) {
+            ocup = false;
+        }
+
+        return ocup;
+    }
+
+    public boolean jugable(int posi, int posj){
+        boolean jug = false;
+        if (tablero[posi][posj].isJugable()){
+            jug = true;
+        }
+
+        return jug;
+    }
+
 }
