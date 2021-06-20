@@ -10,6 +10,7 @@ public class Tablero {
     }
 
     public void dibujarTablero() {
+        System.out.println("\n-----------Partida en Proceso------------------\n");
         System.out.println("\t-------------------------------------------------");
         for (int i = 0; i < tablero.length; i++) {
             System.out.print("\t|");
@@ -75,6 +76,10 @@ public class Tablero {
             movExito= true;
         }
         return movExito;
+    }
+
+    public void comerFicah(){
+        
     }
 
     public boolean casillaOcupada(int posi, int posj){

@@ -9,19 +9,19 @@ public class PPTijera {
     }
 
     public int tirarDado(){
-        this.random =  (int)(Math.random()*3);
+        this.random =  (int)(Math.random()*2);
         return this.random;
     }
 
-    public String  resultado(){
+    public String  resultado(int valor){
         String result = "";
-        if (tirarDado() == 0) {
+        if (valor== 0) {
             result = "****PIEDRA****";
         }
-        if (tirarDado() == 1) {
+        if (valor == 1) {
             result = "****PAPEL****";
         }
-        if (tirarDado() == 2) {
+        if (valor == 2) {
             result = "****TIJERA****";
         }
 
