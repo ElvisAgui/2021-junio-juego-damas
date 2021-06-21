@@ -25,8 +25,7 @@ public class Juego {
                 jugPartida.elgirFicha();
                 do {
                     movFicha();
-                } while (jugPartida.getJugCompetidor()[0].getPiezsPerdidas() != 12
-                        || jugPartida.getJugCompetidor()[1].getPiezsPerdidas() != 12);
+                } while (perdedor());
                 if (jugPartida.getJugCompetidor()[0].getPiezsPerdidas() == 12) {
                     System.out.println("El ganadro es: " + jugPartida.getJugCompetidor()[1].getNombre());
                     jugPartida.getJugCompetidor()[1].setPartidasGanadas(1);
@@ -118,6 +117,17 @@ public class Juego {
          * tablero.moverFicha(2,0,3,1); tablero.moverFicha(5,1,4,0);
          * tablero.dibujarTablero();
          */
+    }
+
+    private boolean perdedor(){
+        boolean per = true;
+        if (jugPartida.getJugCompetidor()[0].getPiezsPerdidas() == 12) {
+            per = false;
+        }
+        if (jugPartida.getJugCompetidor()[1].getPiezsPerdidas() == 12) {
+            per = false;
+        }
+        return per;
     }
 
     public boolean revancha() {

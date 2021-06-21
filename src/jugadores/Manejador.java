@@ -8,10 +8,31 @@ public class Manejador {
     private Jugador jugCompetidor[] = new Jugador[2];
 
     public Manejador() {
-        
+        iniciar();
     }
     
 
+    public void iniciar(){
+        jugadores[0] = new Jugador("Elvis");
+        jugadores[1] = new Jugador("Katy");
+        jugadores[2] = new Jugador("Ferni");
+        jugadores[3] = new Jugador("Josh");
+        jugadores[4] = new Jugador("Pedro");
+        jugadores[5] = new Jugador("Juan");
+        jugadores[6] = new Jugador("Peter");
+        jugadores[7] = new Jugador("Parker");
+
+        
+        for (int i = 0; i < 7; i++){
+            int partidasGanadas = (int)(Math.random()*5);
+            jugadores[i].setPartidasGanadas(partidasGanadas);
+        }
+        for (int i = 0; i < 7; i++){
+            int partidasGanadas = (int)(Math.random()*5);
+            jugadores[i].setPartidasPerdidas(partidasGanadas);
+        }
+
+    }
     public void ingresoJugador() {
         String nombre = " ";
         int op = 0;
@@ -155,10 +176,10 @@ public class Manejador {
         if (iteraciones > 0) {
             for (int i = 0; i < iteraciones; i++) {
                 for (int j = 0; j < iteraciones; j++) {
-                    if (this.jugadores[j].getPartidasGanadas() > this.jugadores[j+1].getPartidasGanadas()) {
+                    if (this.jugadores[j].getPartidasGanadas() <  this.jugadores[i].getPartidasGanadas()) {
                         Jugador tem = jugadores[j];
-                        jugadores[j]=jugadores[j+1];
-                        jugadores[j+1] = tem; 
+                        jugadores[j]=jugadores[i];
+                        jugadores[i] = tem; 
                     }
                 }
             }
