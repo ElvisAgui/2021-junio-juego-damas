@@ -42,6 +42,7 @@ public class Principal {
                 break;
             case 2:
                 this.partida = new Juego(jugadores);
+                //1partida.prueba();
                 partida.iniciarJuego();
                 break;
             case 3:

@@ -65,23 +65,63 @@ public class Tablero {
 
     }
 
-    public boolean moverFicha(int inicioI, int inicioJ,int finI, int finJ){
+    public boolean moverFicha(int inicioI,int inicioJ,int finI , int finJ){
         boolean movExito = false;
         boolean color;
         if (casillaOcupada(inicioI, inicioJ) && casillaOcupada(finI,finJ) == false){
             color = tablero[inicioI][inicioJ].getFicha().isEsNegro();
-            tablero[finI][finJ].setOcupada(true);
             tablero[finI][finJ].getFicha().setEsNegro(color);
+            tablero[finI][finJ].setOcupada(true);
             tablero[inicioI][inicioJ].setOcupada(false);
             movExito= true;
         }
+        
+
         return movExito;
     }
 
-    public void comerFicah(){
+    public boolean saltoFila(int inicioI,int finI){
+        int interedio = inicioI-finI;
+        boolean saltoFila = false;
+        if(interedio == 2 || interedio == -2){
+            saltoFila = true;
+        }
+        return saltoFila;
+    }
+
+    public boolean derecha(int inicioJ, int finJ){
+        boolean derecha = false;
+        if(inicioJ < finJ){
+            derecha = true;
+        }
+        return derecha;
+    }
+
+    public void borrarFicha(int inicioI,int finI ,int inicioJ, int finJ){
+        int posI = 0;
+        int posJ = 0;
+        if (derecha(inicioJ, finJ) && finI < inicioI) {
+            posI = inicioI-1;
+            posJ = inicioJ+1;
+        }
+        if(derecha(inicioJ, finJ) == false && finI < inicioI ){
+            posI = inicioI-1;
+            posJ = inicioJ-1; 
+        }
+        if (derecha(inicioJ, finJ) && inicioI < finI) {
+            posI = inicioI+1;
+            posJ = inicioJ+1; 
+            
+        }
+        if (derecha(inicioJ, finJ) == false && inicioI < finI) {
+            posI = inicioI+1;
+            posJ = inicioJ-1;
+        }
+        tablero[posI][posJ].setOcupada(false);
         
     }
 
+    
     public boolean casillaOcupada(int posi, int posj){
         boolean ocup = false;
         if(tablero[posi][posj].isJugable() && tablero[posi][posj].isOcupada()){
@@ -102,5 +142,7 @@ public class Tablero {
 
         return jug;
     }
+
+    
 
 }

@@ -4,7 +4,6 @@ import src.miniJuego.PPTijera;
 
 public class Jugador {
     private PPTijera miniJuego = new PPTijera();
-    private int puntos;
     private int partidasGanadas;
     private int partidasPerdidas;
     private boolean turno;
@@ -35,7 +34,7 @@ public class Jugador {
     }
 
     public void setPiezsComidas(int piezsComidas) {
-        this.piezsComidas = piezsComidas;
+        this.piezsComidas += piezsComidas;
     }
 
     public int getPiezsPerdidas() {
@@ -43,7 +42,7 @@ public class Jugador {
     }
 
     public void setPiezsPerdidas(int piezsPerdidas) {
-        this.piezsPerdidas = piezsPerdidas;
+        this.piezsPerdidas += piezsPerdidas;
     }
 
    
@@ -53,23 +52,16 @@ public class Jugador {
     }
 
     public void setPartidasPerdidas(int partidasPerdidas) {
-        this.partidasPerdidas = partidasPerdidas;
+        this.partidasPerdidas += partidasPerdidas;
     }
 
-    public int getPuntos() {
-        return puntos;
-    }
-
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
-    }
 
     public int getPartidasGanadas() {
         return partidasGanadas;
     }
 
     public void setPartidasGanadas(int partidasGanadas) {
-        this.partidasGanadas = partidasGanadas;
+        this.partidasGanadas += partidasGanadas;
     }
 
     public boolean getTurno() {
@@ -90,9 +82,7 @@ public class Jugador {
 
     @Override
     public String toString() {
-        return "**Jugador nombre= " + nombre + ", partidasGanadas= " + partidasGanadas + ", puntos= " + puntos + "";
+        return "**Jugador nombre= " + nombre + ", partidasGanadas= " + partidasGanadas +  "";
     }
-    
-
 
 }

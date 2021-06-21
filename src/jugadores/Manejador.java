@@ -130,4 +130,42 @@ public class Manejador {
         } while (aux > 2);
     }
 
+
+    public Jugador[] getJugCompetidor() {
+        return jugCompetidor;
+    }
+
+
+    public void setJugCompetidor(Jugador[] jugCompetidor) {
+        this.jugCompetidor = jugCompetidor;
+    }
+    
+    public void datosJugaresPartida(){
+        System.out.println("**Jugador nombre: " + jugCompetidor[0].getNombre() +" piezas Comidas: "+jugCompetidor[0].getPiezsComidas()+" Pieza perdidas: "+jugCompetidor[0].getPiezsPerdidas()+" ");
+        System.out.println("**Jugador nombre: " + jugCompetidor[1].getNombre() +" piezas Comidas: "+jugCompetidor[1].getPiezsComidas()+" Pieza perdidas: "+jugCompetidor[1].getPiezsPerdidas()+" ");
+    }
+
+    public void odenamiento(){
+        int iteraciones = 0;
+        for (int i = 0; i < jugadores.length; i++) {
+            if (jugadores[i] != null) {
+                iteraciones++;
+            }
+        }
+        if (iteraciones > 0) {
+            for (int i = 0; i < iteraciones; i++) {
+                for (int j = 0; j < iteraciones; j++) {
+                    if (this.jugadores[j].getPartidasGanadas() > this.jugadores[j+1].getPartidasGanadas()) {
+                        Jugador tem = jugadores[j];
+                        jugadores[j]=jugadores[j+1];
+                        jugadores[j+1] = tem; 
+                    }
+                }
+            }
+        }else{
+            System.out.println("primero  ingresa Jugadores ;V");
+        }
+
+    }
+
 }
